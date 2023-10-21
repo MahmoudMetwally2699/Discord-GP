@@ -35,6 +35,7 @@ app.use(
   cors({
     origin: "https://discord-gp-frontend.vercel.app",
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"], // Add headers you want to allow
   })
 );
 app.use(helmet());
