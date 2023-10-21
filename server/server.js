@@ -29,12 +29,15 @@ const port = process.env.PORT || process.env.API_PORT || 5000;
 
 const app = express();
 
+<<<<<<< HEAD
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json("hello");
 });
 
+=======
+>>>>>>> 79e36a427a4ebf3629b4581d2b42cc54aaa1c6b2
 app.use(
   cors({
     origin: "https://discord-gp-frontend.vercel.app/",
@@ -42,6 +45,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
