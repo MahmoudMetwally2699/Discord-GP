@@ -1,78 +1,20 @@
-const authSocket = require("./middlewares/authSocket");
-const newConnectionHandler = require("./socketHandlers/newConnectionHandler");
-const disconnectHandler = require("./socketHandlers/disconnectedHandler");
-const serverStore = require("./serverStore");
-const directMessageHandler = require("./socketHandlers/directMessageHandler");
-const directChatHistoryHandler = require("./socketHandlers/directChatHistoryHandler");
-const roomCreateHandler = require("./socketHandlers/roomCreateHandler");
-const roomJoinHandler = require("./socketHandlers/roomJoinHandler");
-const roomLeaveHandler = require("./socketHandlers/roomLeaveHandler");
-const roomInitializeConnectionHandler = require("./socketHandlers/roomInitializeConnectionHandler");
-const roomSignalingDataHandler = require("./socketHandlers/roomSignalingDataHandler");
+// index.js
+const express = require('express')
 
-const registerSocketServer = (server) => {
-  const io = require("socket.io")(server, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-    },
-  });
+const app = express()
+const PORT = 4000
 
-  serverStore.setSocketServerInstance(io);
+app.listen(PORT, () => {
+  console.log(`API listening on PORT ${PORT} `)
+})
 
-  io.use((socket, next) => {
-    authSocket(socket, next);
-  });
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
 
-  const emitOnlineUsers = () => {
-    const onlineUsers = serverStore.getOnlineUsers();
-    io.emit("online-users", { onlineUsers });
-  };
+app.get('/about', (req, res) => {
+  res.send('This is my about route..... ')
+})
 
-  io.on("connection", (socket) => {
-   
-
-    newConnectionHandler(socket, io);
-    emitOnlineUsers();
-
-    socket.on("direct-message", (data) => {
-      directMessageHandler(socket, data);
-    });
-
-    socket.on("direct-chat-history", (data) => {
-      directChatHistoryHandler(socket, data);
-    });
-
-    socket.on("room-create", () => {
-      roomCreateHandler(socket);
-    });
-
-    socket.on("room-join", (data) => {
-      roomJoinHandler(socket, data);
-    });
-
-    socket.on("room-leave", (data) => {
-      roomLeaveHandler(socket, data);
-    });
-
-    socket.on("conn-init", (data) => {
-      roomInitializeConnectionHandler(socket, data);
-    });
-
-    socket.on("conn-signal", (data) => {
-      roomSignalingDataHandler(socket, data);
-    });
-
-    socket.on("disconnect", () => {
-      disconnectHandler(socket);
-    });
-  });
-
-  setInterval(() => {
-    emitOnlineUsers();
-  }, [1000 * 8]);
-};
-
-module.exports = {
-  registerSocketServer,
-};
+// Export the Express API
+module.exports = app
