@@ -31,6 +31,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.json("hello");
+});
+
 app.use(
   cors({
     origin: "https://discord-gp-frontend.vercel.app/",
