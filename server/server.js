@@ -33,7 +33,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://discord-gp-frontend-ow8gnd4iy-mahmoudmetwally2699.vercel.app/",
+    origin: "https://discord-gp-frontend.vercel.app/",
     methods: ["GET", "POST"],
   })
 );
