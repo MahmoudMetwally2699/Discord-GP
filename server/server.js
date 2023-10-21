@@ -25,16 +25,19 @@ const auth = require("./middlewares/auth");
 //Socket Server
 const socketServer = require("./socketServer");
 
-const port = process.env.PORT || process.env.API_PORT || 5000;
+const port = 5000;
 
 const app = express();
 
+<<<<<<< HEAD
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hey this is my API running 🥳");
+  res.json("hello");
 });
 
+=======
+>>>>>>> 79e36a427a4ebf3629b4581d2b42cc54aaa1c6b2
 app.use(
   cors({
     origin: "https://discord-gp-frontend.vercel.app/",
