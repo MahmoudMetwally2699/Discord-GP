@@ -37,12 +37,7 @@ app.use((req, res, next) => {
 
 
 app.use(
-  cors({
-    origin: "https://discord-gp-frontend.vercel.app/",
-    methods: ["GET", "POST"],
-    credentials: true,
-
-  })
+  cors()
 );
 app.use(helmet());
 app.use(xss());
