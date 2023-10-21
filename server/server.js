@@ -34,14 +34,14 @@ app.use(
     credentials: true,
   })
 );
-app.u
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hey this is my API running 🥳");
 });
 
-se(express.json());
+
+app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
