@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const { StatusCodes } = require("http-status-codes");
 
 const auth = (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://discord-gp-frontend.vercel.app");
 
   let token = req.body.token || req.query.token || req.headers["authorization"];
 
