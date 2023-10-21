@@ -25,16 +25,17 @@ const auth = require("./middlewares/auth");
 //Socket Server
 const socketServer = require("./socketServer");
 
-const port = 3000;
+const port = 5000;
 
 const app = express();
 
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json("hello");
-});
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
+
 
 app.use(
   cors({
