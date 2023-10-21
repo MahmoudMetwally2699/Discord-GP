@@ -32,7 +32,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json("hello");
+  res.send("Hey this is my API running 🥳");
 });
 
 app.use(
