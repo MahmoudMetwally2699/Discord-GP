@@ -34,6 +34,13 @@ app.get("/", (req, res) => {
   res.send("Hey this is my API running 🥳");
 });
 
+
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/friend-invitation", auth, friendInvitationRoutes);
 app.use(
   cors({
     origin: "*",
@@ -42,13 +49,6 @@ app.use(
 
   })
 );
-app.use(helmet());
-app.use(xss());
-app.use(mongoSanitize());
-
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/friend-invitation", auth, friendInvitationRoutes);
-
 const server = http.createServer(app);
 socketServer.registerSocketServer(server);
 
