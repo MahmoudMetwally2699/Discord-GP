@@ -1,19 +1,66 @@
-const express = require('express')
+const express = require("express");
 
-const app = express()
-const PORT = 4000
+const http = require("http");
 
-app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `)
-})
+const cors = require("cors");
 
-app.get('/', (req, res) => {
-  res.send('Hey this is my API running 🥳')
-})
+const mongoose = require("mongoose");
 
-app.get('/about', (req, res) => {
-  res.send('This is my about route..... ')
-})
+require("dotenv").config();
 
-// Export the Express API
-module.exports = app
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const mongoSanitize = require("express-mongo-sanitize");
+//Database Connection
+const connectDB = require("./db/connection");
+
+//Routes
+const authRoutes = require("./routes/authRoutes");
+const friendInvitationRoutes = require("./routes/friendInvitationRoutes");
+
+//middleware auth
+const auth = require("./middlewares/auth");
+
+//Socket Server
+const socketServer = require("./socketServer");
+
+const port = process.env.PORT || process.env.API_PORT || 5000;
+
+const app = express();
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
+
+app.use(
+  cors({
+    origin: "https://discord-gp-frontend.vercel.app/",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+app.use(express.json());
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/friend-invitation", auth, friendInvitationRoutes);
+
+const server = http.createServer(app);
+socketServer.registerSocketServer(server);
+
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    server.listen(port, () =>
+      console.log(`Server is Running on port :${port}...`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
