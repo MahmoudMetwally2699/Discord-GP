@@ -31,13 +31,8 @@ const app = express();
 app.use(express.json());
 
 
-app.use(
-  cors({
-    origin: "https://discord-gp-frontend.vercel.app",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"], // Add headers you want to allow
-  })
-);
+app.use(cors());
+
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
