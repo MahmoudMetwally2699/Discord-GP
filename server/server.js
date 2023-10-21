@@ -40,7 +40,6 @@ app.use(
     methods: ["GET", "POST"],
   })
 );
-app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
