@@ -25,7 +25,7 @@ const auth = require("./middlewares/auth");
 //Socket Server
 const socketServer = require("./socketServer");
 
-const port = "https://discord-gp-api.vercel.app/";
+const port = 3000;
 
 const app = express();
 
