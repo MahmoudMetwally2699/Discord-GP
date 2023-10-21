@@ -27,16 +27,17 @@ const socketServer = require("./socketServer");
 const port = process.env.PORT || process.env.API_PORT || 5000;
 
 const app = express();
-app.use(express.json());
-
 app.use(
   cors({
     origin: "https://discord-gp-frontend.vercel.app/",
     methods: ["GET", "POST"],
+    credentials: true,
   })
 );
 
 
+
+app.use(express.json());
 
 
 app.use(helmet());
