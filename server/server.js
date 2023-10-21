@@ -11,7 +11,6 @@ require("dotenv").config();
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const mongoSanitize = require("express-mongo-sanitize");
-
 //Database Connection
 const connectDB = require("./db/connection");
 
