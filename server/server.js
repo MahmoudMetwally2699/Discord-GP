@@ -36,9 +36,8 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "https://discord-gp-frontend.vercel.app/",
+    origin: "*",
     methods: ["GET", "POST"],
-    credentials: true,
   })
 );
 app.use(express.json());
