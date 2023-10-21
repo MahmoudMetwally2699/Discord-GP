@@ -28,15 +28,15 @@ const port = process.env.PORT || process.env.API_PORT || 5000;
 
 const app = express();
 
-app.use(express.json());
 
 
 app.use(
   cors({
-    origin: "https://discord-gp-frontend.vercel.app",
+    origin: "https://discord-gp-frontend.vercel.app/",
     methods: ["GET", "POST"],
   })
 );
+app.use(express.json());
 
 app.use(helmet());
 app.use(xss());
