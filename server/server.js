@@ -33,13 +33,10 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://discord-gp-frontend.vercel.app/",
+    origin: "https://discord-gp-frontend.vercel.app",
     methods: ["GET", "POST"],
-    credentials: true,
-
   })
 );
-
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
