@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const { StatusCodes } = require("http-status-codes");
 
 const auth = (req, res, next) => {
+
   let token = req.body.token || req.query.token || req.headers["authorization"];
 
   if (!token) {
