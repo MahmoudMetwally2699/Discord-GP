@@ -8,8 +8,8 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "src": "http://localhost:5000/",
+      "dest": "http://localhost:5000/"
     }
   ]
 }
