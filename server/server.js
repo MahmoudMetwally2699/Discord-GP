@@ -27,13 +27,6 @@ const socketServer = require("./socketServer");
 const port = process.env.PORT || process.env.API_PORT || 5000;
 
 const app = express();
-
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hey this is my API running 🥳");
-});
-
 app.use(
   cors({
     origin: "https://discord-gp-frontend.vercel.app/",
@@ -41,7 +34,14 @@ app.use(
     credentials: true,
   })
 );
+app.u
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
+
+se(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
