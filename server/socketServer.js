@@ -13,7 +13,7 @@ const roomSignalingDataHandler = require("./socketHandlers/roomSignalingDataHand
 const registerSocketServer = (server) => {
  const io = require("socket.io")(server, {
     cors: {
-      origin: "https://discord-gp-frontend.vercel.app",
+      origin: "*",
       methods: ["GET", "POST"],
       credentials: true, // You may need this if you are using cookies or authentication.
       allowedHeaders: ["Authorization"], // Include any custom headers you need.
