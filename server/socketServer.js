@@ -11,13 +11,14 @@ const roomInitializeConnectionHandler = require("./socketHandlers/roomInitialize
 const roomSignalingDataHandler = require("./socketHandlers/roomSignalingDataHandler");
 
 const registerSocketServer = (server) => {
-  const io = require("socket.io")(server, {
+ const io = require("socket.io")(server, {
     cors: {
-      origin: "https://discord-gp-frontend.vercel.app", // Update the origin
-    methods: ["GET", "POST"],
+      origin: "https://discord-gp-frontend.vercel.app",
+      methods: ["GET", "POST"],
+      credentials: true, // You may need this if you are using cookies or authentication.
+      allowedHeaders: ["Authorization"], // Include any custom headers you need.
     },
   });
-
   serverStore.setSocketServerInstance(io);
 
   io.use((socket, next) => {
